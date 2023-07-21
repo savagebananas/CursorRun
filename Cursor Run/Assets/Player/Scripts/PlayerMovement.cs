@@ -20,11 +20,15 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpGroundThreshold = 1;
 
+    public Transform front;
+    public Transform back;
+
 
     void Update()
     {
         Vector2 pos = transform.position;
         float groundDistance = Mathf.Abs(pos.y - groundHeight);
+
         if (isGrounded || groundDistance <= jumpGroundThreshold)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -35,20 +39,22 @@ public class PlayerMovement : MonoBehaviour
                 holdJumpTimer = 0;
             }
         }            
+
         if (Input.GetKeyUp(KeyCode.Space))
-            {
+        {
                 isHoldingJump = false; 
-            }
+        }
     }
 
 
     private void FixedUpdate()
     {
         Vector2 pos = transform.position;
-        if (!isGrounded) 
+        
+        if(!isGrounded) 
         {
             //JumpHold
-            if (isHoldingJump)
+            if(isHoldingJump)
             {
                 holdJumpTimer += Time.fixedDeltaTime;
                 if (holdJumpTimer >= maxHoldJumpTime) 
@@ -65,21 +71,23 @@ public class PlayerMovement : MonoBehaviour
                 velocity.y += gravity * Time.fixedDeltaTime;
             }
             
-            Vector2 RayOrigin = new Vector2(pos.x + 4f, pos.y);
+            //Check for ground
+            Vector2 RayOrigin = front.transform.position;
             Vector2 rayDirection = Vector2.up;
             float rayDistance = velocity.y * Time.fixedDeltaTime;
             RaycastHit2D hit2D = Physics2D.Raycast(RayOrigin, rayDirection, rayDistance);
             if(hit2D.collider != null)
             {
-
+                Ground ground = hit2D.collider.GetComponent<Ground>();
+                if(ground != null)
+                {
+                    groundHeight = ground.groundHeight;
+                    pos.y = groundHeight;
+                    isGrounded = true;
+                }
             }
-            
-            //IsGrounded check
-            //if(pos.y <= groundHeight) 
-            //{
-            //    pos.y = groundHeight;
-            //    isGrounded = true;
-            //}
+
+            Debug.DrawRay(RayOrigin, rayDirection * rayDistance, Color.red);
         }
 
         distance += velocity.x * Time.fixedDeltaTime;
@@ -91,6 +99,18 @@ public class PlayerMovement : MonoBehaviour
             
             velocity.x += acceleration * Time.fixedDeltaTime;
             if (velocity.x >= maxXVelocity) velocity.x = maxXVelocity;
+
+            //Check for not ground
+            Vector2 RayOrigin = back.transform.position;
+            Vector2 rayDirection = Vector2.up;
+            float rayDistance = velocity.y * Time.fixedDeltaTime;
+            RaycastHit2D hit2D = Physics2D.Raycast(RayOrigin, rayDirection, rayDistance);
+            if (hit2D.collider == null)
+            { 
+                isGrounded = false;
+            }
+
+            Debug.DrawRay(RayOrigin, rayDirection * rayDistance, Color.yellow);
         }
 
         transform.position = pos;
