@@ -16,7 +16,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Post Processing
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background Layer 3
+    uniqueID: 3656267265
+    locked: 0
+  - name: Background layer 2
+    uniqueID: 2430447543
+    locked: 0
+  - name: Background Layer 1
+    uniqueID: 1937482859
+    locked: 0
+  - name: Player
+    uniqueID: 2590011031
     locked: 0
