@@ -25,7 +25,12 @@ public class Parallax : MonoBehaviour
 
         pos.x -= realVelocity * Time.deltaTime; //goes opposite direction of player to show speed
 
-        if (pos.x <= -20) pos.x = 20;
+        if (pos.x <= -20)
+        {
+            pos.x = 20;
+            pos.y = Random.Range(-4.8f, 4f);
+        }
+            
 
         transform.position = pos;
     }

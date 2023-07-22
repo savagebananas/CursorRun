@@ -11,7 +11,7 @@ public class Ground : MonoBehaviour
     public Transform screenRight;
     BoxCollider2D collider;
 
-    bool didGenerateGround = false;
+    public bool didGenerateGround = false;
 
     private void Awake()
     {
@@ -59,16 +59,37 @@ public class Ground : MonoBehaviour
     {
         didGenerateGround = true;
 
-        GameObject g = Instantiate(gameObject);
-
-        BoxCollider2D gCollider = g.GetComponent<BoxCollider2D>();
-
+        GameObject go = Instantiate(gameObject);
+        BoxCollider2D goCollider = go.GetComponent<BoxCollider2D>();
         Vector2 pos;
-        pos.x = screenRight.position.x + 5;
-        pos.y = transform.position.y;
-        g.transform.position = pos;
 
-        Ground ground = g.GetComponent<Ground>();
-        ground.groundHeight = g.transform.position.y + (ground.collider.size.y / 2);
+        float h1 = player.jumpVelocity * player.maxHoldJumpTime;
+        float t = player.jumpVelocity / -player.gravity;
+        float h2 = player.jumpVelocity * t + (0.5f * (player.gravity * (t * t)));
+        float maxJumpHeight = h1 + h2;
+        float maxY = maxJumpHeight * 0.7f;
+        maxY += groundHeight;
+        float minY = -5f;
+        float actualY = Random.Range(minY, maxY);
+
+        pos.y = actualY - transform.localScale.y / 2;
+        if (pos.y > 2.7f)
+            pos.y = 2.7f;
+
+        float t1 = t + player.maxHoldJumpTime;
+        float t2 = Mathf.Sqrt((2.0f * (maxY - actualY)) / -player.gravity);
+        float totalTime = t1 + t2;
+        float maxX = totalTime * player.velocity.x;
+        maxX *= 0.7f;
+        maxX += groundRight;
+        float minX = screenRight.position.x + 5;
+        float actualX = Random.Range(minX, maxX);
+
+        pos.x = actualX + transform.localScale.x / 2;
+        go.transform.position = pos;
+
+        Ground goGround = go.GetComponent<Ground>();
+        goGround.groundHeight = go.transform.position.y + (transform.localScale.y / 2);
+        goGround.didGenerateGround = false;
     }
 }
