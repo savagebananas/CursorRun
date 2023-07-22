@@ -12,10 +12,9 @@ public class PlatformSpawner : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (timeBtwSpawn <= 0)
@@ -29,5 +28,10 @@ public class PlatformSpawner : MonoBehaviour
         {
             timeBtwSpawn -= Time.deltaTime;
         }
+    }
+
+    private void LateUpdate()
+    {
+
     }
 }

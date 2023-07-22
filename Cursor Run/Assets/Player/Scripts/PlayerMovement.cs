@@ -16,7 +16,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isHoldingJump = false;
     public float maxHoldJumpTime = 0.4f;
-    public float holdJumpTimer;
+    public float maxMaxHoldJumpTime = 0.4f;
+    public float holdJumpTimer = 0f;
 
     public float jumpGroundThreshold = 1;
 
@@ -42,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-                isHoldingJump = false; 
+            isHoldingJump = false; 
         }
     }
 
@@ -64,13 +65,14 @@ public class PlayerMovement : MonoBehaviour
             }
 
             pos.y += velocity.y * Time.fixedDeltaTime;
-            
+
             //Gravity
             if (!isHoldingJump) 
             {
                 velocity.y += gravity * Time.fixedDeltaTime;
             }
-            
+
+
             //Check for ground
             Vector2 RayOrigin = front.transform.position;
             Vector2 rayDirection = Vector2.up;
@@ -88,6 +90,8 @@ public class PlayerMovement : MonoBehaviour
             }
 
             Debug.DrawRay(RayOrigin, rayDirection * rayDistance, Color.red);
+
+            
         }
 
         distance += velocity.x * Time.fixedDeltaTime;
@@ -96,7 +100,9 @@ public class PlayerMovement : MonoBehaviour
         {
             float velocityRatio = velocity.x / maxXVelocity;
             acceleration = maxAcceleration * (1 - velocityRatio); //acceleration will lower as speed increases
+            maxHoldJumpTime = maxMaxHoldJumpTime * velocityRatio;
             
+
             velocity.x += acceleration * Time.fixedDeltaTime;
             if (velocity.x >= maxXVelocity) velocity.x = maxXVelocity;
 
