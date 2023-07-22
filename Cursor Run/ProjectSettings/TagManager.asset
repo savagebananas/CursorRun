@@ -16,8 +16,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - Post Processing
+  - Post Processing Glow
+  - Post Processing Background
   - 
   - 
   - 
@@ -53,4 +53,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2590011031
+    locked: 0
+  - name: Enemy
+    uniqueID: 136086645
     locked: 0

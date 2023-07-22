@@ -1,19 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class TypingEffect : MonoBehaviour
 {
-    public float secondsPerCharacter;
+    public TextMeshProUGUI titleUI;
+    public string title;
 
     void Start()
     {
-        
+        StartCoroutine(TypeSentence(title));
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    IEnumerator TypeSentence(string sentence)
+    {
+        titleUI.text = "";
+        foreach(char letter in title.ToCharArray())
+        {
+            titleUI.text += letter;
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 }
