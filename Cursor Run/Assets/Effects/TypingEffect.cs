@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class TypingEffect : MonoBehaviour
 {
+    public GameObject button;
     public TextMeshProUGUI titleUI;
     public string title;
 
@@ -27,5 +28,6 @@ public class TypingEffect : MonoBehaviour
             titleUI.text += letter;
             yield return new WaitForSeconds(0.2f);
         }
+        button.SetActive(true);
     }
 }

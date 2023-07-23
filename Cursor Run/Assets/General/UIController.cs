@@ -9,6 +9,8 @@ public class UIController : MonoBehaviour
     PlayerMovement player;
     TextMeshProUGUI distanceText;
 
+    public GameObject panel;
+
     private void Awake()
     {
         player = GameObject.Find("Player").GetComponent<PlayerMovement>();
@@ -17,7 +19,6 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        
     }
 
     void Update()
