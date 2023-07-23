@@ -30,7 +30,6 @@ public class AudioManager : MonoBehaviour
             sound.source.pitch = sound.pitch;
             sound.source.loop = sound.loop;
         }
-        PlaySound("Battle Theme");
     }
 
     public void PlaySound(string name)

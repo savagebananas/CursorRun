@@ -25,5 +25,13 @@ public class MainMenuCutscene2 : MonoBehaviour
         var w = Instantiate(windowsScreen);
         yield return new WaitForSeconds(1f);
         w.GetComponent<Animator>().SetTrigger("screenShatter");
+        StartCoroutine(StartMusic());
+        
+    }
+
+    private IEnumerator StartMusic()
+    {
+        yield return new WaitForSeconds(1f);
+        AudioManager.instance.PlaySound("Battle Theme");
     }
 }

@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
 
     private Animator animator;
 
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -27,6 +29,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        Debug.Log("ow");
         animator.SetTrigger("hit");
         StartCoroutine(Flash(GetComponent<SpriteRenderer>(), flashDuration, Color.white));
     }

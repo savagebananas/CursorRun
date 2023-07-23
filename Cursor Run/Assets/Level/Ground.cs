@@ -9,21 +9,20 @@ public class Ground : MonoBehaviour
     public float groundHeight;
     public float groundRight;
     public Transform screenRight;
-    BoxCollider2D collider;
+
+    EnemyMoveAround enemy;
 
     public bool didGenerateGround = false;
 
     private void Awake()
     {
         player = GameObject.Find("Player").GetComponent<PlayerMovement>();
-
-        collider = GetComponent<BoxCollider2D>();
         groundHeight = transform.position.y + (transform.localScale.y/2);
     }
 
     void Start()
     {
-
+        enemy = GameObject.Find("EnemyMoveAround").GetComponent<EnemyMoveAround>();
     }
 
     // Update is called once per frame
@@ -63,6 +62,7 @@ public class Ground : MonoBehaviour
         BoxCollider2D goCollider = go.GetComponent<BoxCollider2D>();
         Vector2 pos;
 
+        //Set ground height
         float h1 = player.jumpVelocity * player.maxHoldJumpTime;
         float t = player.jumpVelocity / -player.gravity;
         float h2 = player.jumpVelocity * t + (0.5f * (player.gravity * (t * t)));
@@ -76,6 +76,7 @@ public class Ground : MonoBehaviour
         if (pos.y > 2.7f)
             pos.y = 2.7f;
 
+        //Set ground distance
         float t1 = t + player.maxHoldJumpTime;
         float t2 = Mathf.Sqrt((2.0f * (maxY - actualY)) / -player.gravity);
         float totalTime = t1 + t2;
@@ -88,8 +89,10 @@ public class Ground : MonoBehaviour
         pos.x = actualX + transform.localScale.x / 2;
         go.transform.position = pos;
 
+
         Ground goGround = go.GetComponent<Ground>();
         goGround.groundHeight = go.transform.position.y + (transform.localScale.y / 2);
+        enemy.nextGroundHeight = goGround.groundHeight;
         goGround.didGenerateGround = false;
     }
 }

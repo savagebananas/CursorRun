@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MainMenuCutscene : MonoBehaviour
 {
+    public GameObject titleUI;
+    public GameObject buttonUI;
+
     public Animator spiderAnimator;
     public AnimationClip spiderAnimation;
     public GameObject screenExplosion;
@@ -13,8 +16,23 @@ public class MainMenuCutscene : MonoBehaviour
 
     public void StartGame()
     {
+        AudioManager.instance.PlaySound("Button Click");
+        FadeOutUI();
         StartCoroutine(SpiderAnimation());
-        //ScenesManager.Instance.LoadNewGame();
+    }
+
+    private void FadeOutUI()
+    {
+        titleUI.GetComponent<Animator>().SetTrigger("FadeOut");
+        buttonUI.GetComponent<Animator>().SetTrigger("FadeOut");
+        StartCoroutine(DisableUIElements());
+    }
+
+    private IEnumerator DisableUIElements()
+    {
+        yield return new WaitForSeconds(1f);
+        titleUI.SetActive(false);
+        buttonUI.SetActive(false);
     }
 
     private IEnumerator SpiderAnimation()
@@ -26,6 +44,7 @@ public class MainMenuCutscene : MonoBehaviour
     private IEnumerator ScreenExplosion()
     {
         var i = Instantiate(screenExplosion, new Vector3(0, 0, 0), Quaternion.identity);
+        AudioManager.instance.PlaySound("Screen Explosion");
         yield return new WaitForSeconds(screenExplosionAnimation.length);
         ScenesManager.Instance.LoadNewGame();
         StartCoroutine(WhiteFadeOut(i));

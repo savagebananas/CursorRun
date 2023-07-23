@@ -336,6 +336,7 @@ GameObject:
   - component: {fileID: 387845215}
   - component: {fileID: 387845214}
   - component: {fileID: 387845216}
+  - component: {fileID: 387845217}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -352,7 +353,7 @@ RectTransform:
   m_GameObject: {fileID: 387845212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 140751693}
@@ -410,10 +411,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 80
+  m_fontSize: 64
+  m_fontSizeBase: 64
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -475,6 +476,26 @@ MonoBehaviour:
   button: {fileID: 422480024}
   titleUI: {fileID: 387845214}
   title: CURSOR RUN
+--- !u!95 &387845217
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387845212}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0930f3033b07d044da08255d05576d00, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &422480024
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,16 +525,16 @@ RectTransform:
   m_GameObject: {fileID: 422480024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1664088936}
   m_Father: {fileID: 140751693}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -148}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &422480026
@@ -1073,10 +1094,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: 
-    audioClip: {fileID: 0}
-    volume: 0
-    pitch: 0
+  - name: Screen Explosion
+    audioClip: {fileID: 8300000, guid: 84de10ebfa5a06b4eb08d889578ad8b6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Spider Walk
+    audioClip: {fileID: 8300000, guid: 1e4a6539ae256fc408ff97ba9a2a3027, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Button Click
+    audioClip: {fileID: 8300000, guid: 4120b322871a25f4d80c6488ae375b5b, type: 3}
+    volume: 1
+    pitch: 1
     loop: 0
     source: {fileID: 0}
 --- !u!4 &1282476756
@@ -1154,6 +1187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2436bef9544bb49bf4e15eb257c099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titleUI: {fileID: 387845212}
+  buttonUI: {fileID: 422480024}
   spiderAnimator: {fileID: 766869360}
   spiderAnimation: {fileID: 7400000, guid: 90207fe806e572c49a8b78e4d8fb6e8f, type: 2}
   screenExplosion: {fileID: 1973460182395052369, guid: 2d23ef2096da866429a88f398de158f7, type: 3}
@@ -1519,7 +1554,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 3120562175
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

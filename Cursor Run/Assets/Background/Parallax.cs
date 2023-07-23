@@ -8,6 +8,8 @@ public class Parallax : MonoBehaviour
     public float depth = 1;
     PlayerMovement player;
 
+    public bool reuseObject;
+
     private void Awake()
     {
         player = GameObject.Find("Player").GetComponent<PlayerMovement>();
@@ -27,8 +29,15 @@ public class Parallax : MonoBehaviour
 
         if (pos.x <= -20)
         {
-            pos.x = 20;
-            pos.y = Random.Range(-4.8f, 4f);
+            if (reuseObject)
+            {
+                pos.x = 20;
+                pos.y = Random.Range(-4.8f, 4f);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
             
 
