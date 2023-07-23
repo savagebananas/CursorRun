@@ -14,6 +14,8 @@ public class Ground : MonoBehaviour
 
     public bool didGenerateGround = false;
 
+    public Obstacle spikeTemplate;
+
     private void Awake()
     {
         if (GameObject.Find("Player") != null) player = GameObject.Find("Player").GetComponent<PlayerMovement>();
@@ -96,6 +98,21 @@ public class Ground : MonoBehaviour
         Ground goGround = go.GetComponent<Ground>();
         goGround.groundHeight = go.transform.position.y + (transform.localScale.y / 2);
         if(enemy != null) enemy.nextGroundHeight = goGround.groundHeight;
+
+        //Generate Spikes
+        int obstacleNum = Random.Range(0, 3);
+        for(int i = 0; i < obstacleNum; i++)
+        {
+            GameObject box = Instantiate(spikeTemplate.gameObject);
+            float y = goGround.groundHeight;
+            float halfWidth = goCollider.size.x / 2 - 1;
+            float left = go.transform.position.x - halfWidth;
+            float right = go.transform.position.x + halfWidth;
+            float x = Random.Range(left, right);
+            Vector2 boxPos = new Vector2(x, y);
+            box.transform.position = boxPos;
+        }
+        
         goGround.didGenerateGround = false;
     }
 }

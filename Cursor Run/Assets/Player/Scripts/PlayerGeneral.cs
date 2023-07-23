@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerGeneral : MonoBehaviour
 {
@@ -21,18 +22,21 @@ public class PlayerGeneral : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.tag == "damagePlayer")
+        if(collision.gameObject.name == "Spike(Clone)")
         {
             StartCoroutine(PlayerDeath());
             hasDied = true;
         }
     }
 
+
     IEnumerator PlayerDeath()
     {
         Instantiate(deathParticles, transform.position, Quaternion.identity);
+        gameObject.GetComponent<CinemachineImpulseSource>().GenerateImpulse();
+        AudioManager.instance.PlaySound("Player Dead");
         GameObject.Find("GameManager").GetComponent<GameManager>().GameOver();
         Destroy(gameObject);
         yield return new WaitForSeconds(1f);

@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Bullet : MonoBehaviour
 {
     public float speed;
     void Start()
     {
-        
+        gameObject.GetComponent<CinemachineImpulseSource>().GenerateImpulse();
     }
 
     void FixedUpdate()
