@@ -38,7 +38,6 @@ public class EnemyMoveAround : State
         }
         if((Vector2)transform.position == (Vector2)nextRoamPosition) //once reached target location, cooldown before finding new location
         {
-            Debug.Log(1);
             StartCoroutine(roamingCooldown());
         }
     }

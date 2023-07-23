@@ -16,19 +16,22 @@ public class Ground : MonoBehaviour
 
     private void Awake()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        if (GameObject.Find("Player") != null) player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         groundHeight = transform.position.y + (transform.localScale.y/2);
     }
 
     void Start()
     {
-        enemy = GameObject.Find("EnemyMoveAround").GetComponent<EnemyMoveAround>();
+        if (GameObject.Find("EnemyMoveAround") != null)
+        {
+            enemy = GameObject.Find("EnemyMoveAround").GetComponent<EnemyMoveAround>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -92,7 +95,7 @@ public class Ground : MonoBehaviour
 
         Ground goGround = go.GetComponent<Ground>();
         goGround.groundHeight = go.transform.position.y + (transform.localScale.y / 2);
-        enemy.nextGroundHeight = goGround.groundHeight;
+        if(enemy != null) enemy.nextGroundHeight = goGround.groundHeight;
         goGround.didGenerateGround = false;
     }
 }

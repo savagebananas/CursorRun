@@ -15,6 +15,8 @@ public class Bullet : MonoBehaviour
         Vector2 pos = transform.position;
         pos.x += speed * Time.fixedDeltaTime;
         transform.position = pos;
+
+        if (transform.position.x > 20) Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

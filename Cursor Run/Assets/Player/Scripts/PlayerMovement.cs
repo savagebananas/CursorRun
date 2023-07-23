@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform back;
 
 
+
     void Update()
     {
         Vector2 pos = transform.position;
@@ -45,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isHoldingJump = false; 
         }
+
     }
 
 
