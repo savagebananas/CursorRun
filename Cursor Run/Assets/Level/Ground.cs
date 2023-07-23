@@ -37,7 +37,7 @@ public class Ground : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 pos = transform.position;
-        pos.x -= player.velocity.x * Time.fixedDeltaTime;
+        if(player != null) pos.x -= player.velocity.x * Time.fixedDeltaTime;
 
         groundRight = transform.position.x + (transform.localScale.x / 2);
 

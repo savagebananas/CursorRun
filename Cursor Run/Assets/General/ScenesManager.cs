@@ -15,7 +15,8 @@ public class ScenesManager : MonoBehaviour
     public enum Scene
     {
         MainMenu,
-        Game
+        Game,
+        GameOver
     }
 
     public void LoadScene(Scene scene)
@@ -31,5 +32,10 @@ public class ScenesManager : MonoBehaviour
     public void ReturnToMenu()
     {
         SceneManager.LoadScene(Scene.MainMenu.ToString());
+    }
+
+    public void LoadGameOverScreen()
+    {
+        SceneManager.LoadScene(Scene.GameOver.ToString());
     }
 }

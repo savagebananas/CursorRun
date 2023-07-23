@@ -28,6 +28,6 @@ public class TypingEffect : MonoBehaviour
             titleUI.text += letter;
             yield return new WaitForSeconds(0.2f);
         }
-        button.SetActive(true);
+        if(button != null) button.SetActive(true);
     }
 }

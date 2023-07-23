@@ -33,6 +33,7 @@ public class PlayerGeneral : MonoBehaviour
     IEnumerator PlayerDeath()
     {
         Instantiate(deathParticles, transform.position, Quaternion.identity);
+        GameObject.Find("GameManager").GetComponent<GameManager>().GameOver();
         Destroy(gameObject);
         yield return new WaitForSeconds(1f);
     }
