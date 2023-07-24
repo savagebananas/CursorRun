@@ -2154,8 +2154,8 @@ MonoBehaviour:
   groundHeight: 0
   isGrounded: 0
   isHoldingJump: 0
-  maxHoldJumpTime: 0.5
-  maxMaxHoldJumpTime: 0.5
+  maxHoldJumpTime: 0.4
+  maxMaxHoldJumpTime: 0.4
   holdJumpTimer: 0
   jumpGroundThreshold: 1
   front: {fileID: 705197830}
